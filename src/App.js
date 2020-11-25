@@ -1,9 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import './tailwind.output.css';
 
 import {
   HashRouter,
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";

@@ -22,7 +22,14 @@ function KnowledgeBaseTopicExpanded(props){
                 <p className='text-gray-800'>{props.helpTopic.fields.topic}</p>
                 <p className='text-purple-600'><FiMinus/></p>
             </div>
-            <p className='cursor-pointer text-gray-600 font-light text-base pb-4 px-4' onClick={(event) =>  props.copyToClipboard(event)}>{props.helpTopic.fields.response}</p>
+            {props.isCopied
+            ? <div className='relative'>
+                <p className='cursor-pointer text-gray-600 font-light text-base pb-6 px-4' onClick={(event) =>  props.copyToClipboard(event)}>{props.helpTopic.fields.response}</p>
+                <p className='w-full absolute bottom-0 text-xs bg-purple-600 text-white text-center font-light py-0.5'>Copied to clipboard</p>
+            </div>
+            : <p className='cursor-pointer text-gray-600 font-light text-base pb-6 px-4' onClick={(event) =>  props.copyToClipboard(event)}>{props.helpTopic.fields.response}</p>
+            }
+            {/* <p className='cursor-pointer text-gray-600 font-light text-base pb-4 px-4' onClick={(event) =>  props.copyToClipboard(event)}>{props.helpTopic.fields.response}</p> */}
         </div>
     )
 }

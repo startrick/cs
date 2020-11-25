@@ -9,6 +9,7 @@ class KnowledgeBaseContent extends React.Component{
             helpTopics: [],
             textToCopy: '',
             selectedTopicId: '',
+            isCopied: false,
         }
         this.getKnowledgeBaseContent = this.getKnowledgeBaseContent.bind(this);
         this.copyToClipboard = this.copyToClipboard.bind(this);
@@ -24,6 +25,7 @@ class KnowledgeBaseContent extends React.Component{
             if(response.status===200){
                 this.setState({
                     helpTopics: response.data.records,
+                    isCopied: false,
                 })
             }
         }
@@ -33,6 +35,7 @@ class KnowledgeBaseContent extends React.Component{
     getSelectedTopic = async(selectedTopicId) => {
         await this.setState({
             selectedTopicId: selectedTopicId,
+            isCopied: false,
         })
     }
 
@@ -40,6 +43,7 @@ class KnowledgeBaseContent extends React.Component{
         // console.log(event.target.innerText);
         await this.setState({
             textToCopy: event.target.innerText,
+            isCopied: true,
         });
         navigator.clipboard.writeText(this.state.textToCopy);
     }
@@ -51,7 +55,7 @@ class KnowledgeBaseContent extends React.Component{
     render(){
         return(
             <div>
-                <KnowledgeBaseView helpTopics={this.state.helpTopics} copyToClipboard={this.copyToClipboard} selectedTopicId={this.state.selectedTopicId} getSelectedTopic={this.getSelectedTopic}/>
+                <KnowledgeBaseView helpTopics={this.state.helpTopics} copyToClipboard={this.copyToClipboard} selectedTopicId={this.state.selectedTopicId} getSelectedTopic={this.getSelectedTopic} isCopied={this.state.isCopied}/>
             </div>
         )
     }

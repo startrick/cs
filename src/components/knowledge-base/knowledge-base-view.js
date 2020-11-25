@@ -1,13 +1,12 @@
 import React from 'react';
 import '../../tailwind.output.css';
-import {FiPlus} from 'react-icons/fi';
 import {KnowledgeBaseTopicExpanded, KnowledgeBaseTopicCollapsed} from './knowledge-base-topic';
 
 function KnowledgeBaseView(props){
     const helpTopics = props.helpTopics.map((helpTopic) => {
         return(
             props.selectedTopicId === helpTopic.id
-            ? <KnowledgeBaseTopicExpanded key={helpTopic.id} helpTopic={helpTopic} copyToClipboard={props.copyToClipboard} getSelectedTopic={props.getSelectedTopic}/>
+            ? <KnowledgeBaseTopicExpanded key={helpTopic.id} helpTopic={helpTopic} copyToClipboard={props.copyToClipboard} getSelectedTopic={props.getSelectedTopic} isCopied={props.isCopied}/>
             : <KnowledgeBaseTopicCollapsed key={helpTopic.id} helpTopic={helpTopic} copyToClipboard={props.copyToClipboard} getSelectedTopic={props.getSelectedTopic}/>
         )
     }
