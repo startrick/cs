@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import './tailwind.output.css';
 
 import {
+  HashRouter,
   BrowserRouter as Router,
   Switch,
   Route
@@ -11,6 +12,7 @@ import KnowledgeBaseContent from './components/knowledge-base/knowledge-base-con
 
 function App() {
   return (
+    <HashRouter basename='/'>
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
@@ -18,6 +20,8 @@ function App() {
           </Switch>
         </Suspense>
       </Router>
+    </HashRouter>
+      
   );
 }
 
