@@ -13,13 +13,13 @@ import KnowledgeBaseContent from './components/knowledge-base/knowledge-base-con
 function App() {
   return (
     <HashRouter basename='/'>
-      <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+      {/* <Router>
+        <Suspense fallback={<div>Loading...</div>}> */}
           <Switch>
             <Route exact path='/' component={KnowledgeBaseContent}/>
           </Switch>
-        </Suspense>
-      </Router>
+        {/* </Suspense>
+      </Router> */}
     </HashRouter>
       
   );
