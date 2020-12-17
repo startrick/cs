@@ -6,90 +6,63 @@ class KnowledgeBaseContent extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            messages: [],
+            helpTopics: [],
             textToCopy: '',
-            selectedMessageId: '',
+            selectedTopicId: '',
             isCopied: false,
-            triggers: [],
-            cases: [],
-            selectedTrigger: '',
-            selectedCase: '',
+            keywords: [],
+            filter: '',
         }
-        this.getMessages = this.getMessages.bind(this);
+        this.getKnowledgeBaseContent = this.getKnowledgeBaseContent.bind(this);
         this.copyToClipboard = this.copyToClipboard.bind(this);
-        this.getSelectedMessage = this.getSelectedMessage.bind(this);
-        this.getTriggers = this.getTriggers.bind(this);
-        this.getSelectedTrigger = this.getSelectedTrigger.bind(this);
-        this.getCases = this.getCases.bind(this);
-        this.getSelectedCase = this.getSelectedCase.bind(this);
+        this.getSelectedTopic = this.getSelectedTopic.bind(this);
+        this.getKeywords = this.getKeywords.bind(this);
+        this.getSelectedFilter = this.getSelectedFilter.bind(this);
     }
 
-    getMessages = async() => {
+    getKnowledgeBaseContent = async() => {
 
-        let baseURL = "https://api.airtable.com/v0/appreOzGpWJS7AEpr/Messages"
+        let baseURL = "https://api.airtable.com/v0/appZD9qRVCfSRenHA/Customer%20Support%20Queries"
         let headers = { 'authorization': "Bearer key04kzdBL9zJQCwp" }
     
         await axios.get(baseURL, {headers: headers})
         .then((response) => {
             if(response.status===200){
                 this.setState({
-                    messages: response.data.records,
+                    helpTopics: response.data.records,
                     isCopied: false,
                 })
-                // console.log(response);
             }
         }
         )
     }
 
-    getSelectedMessage = async(selectedMessageId) => {
+    getSelectedTopic = async(selectedTopicId) => {
         await this.setState({
-            selectedMessageId: selectedMessageId,
-            // isCopied: false,
+            selectedTopicId: selectedTopicId,
+            isCopied: false,
         })
     }
 
-    getTriggers = async() => {
+    getKeywords = async() => {
 
-        let baseURL = "https://api.airtable.com/v0/appreOzGpWJS7AEpr/Triggers"
+        let baseURL = "https://api.airtable.com/v0/appZD9qRVCfSRenHA/Keywords"
         let headers = { 'authorization': "Bearer key04kzdBL9zJQCwp" }
     
         await axios.get(baseURL, {headers: headers})
         .then((response) => {
             if(response.status===200){
                 this.setState({
-                    triggers: response.data.records,
+                    keywords: response.data.records,
                 })
             }
         }
         )
     }
 
-    getSelectedTrigger = async(selectedTrigger) => {
+    getSelectedFilter = async(filter) => {
         await this.setState({
-            selectedTrigger: selectedTrigger
-        })
-    }
-
-    getCases = async() => {
-
-        let baseURL = "https://api.airtable.com/v0/appreOzGpWJS7AEpr/Cases"
-        let headers = { 'authorization': "Bearer key04kzdBL9zJQCwp" }
-    
-        await axios.get(baseURL, {headers: headers})
-        .then((response) => {
-            if(response.status===200){
-                this.setState({
-                    cases: response.data.records,
-                })
-            }
-        }
-        )
-    }
-
-    getSelectedCase = async(selectedCase) => {
-        await this.setState({
-            selectedCase: selectedCase
+            filter: filter,
         })
     }
 
@@ -103,9 +76,8 @@ class KnowledgeBaseContent extends React.Component{
     }
 
     componentDidMount(){
-        this.getMessages();
-        this.getCases();
-        this.getTriggers();
+        this.getKnowledgeBaseContent();
+        this.getKeywords();
     }
 
     render(){
@@ -113,17 +85,14 @@ class KnowledgeBaseContent extends React.Component{
         return(
             <div>
                 <KnowledgeBaseView 
-                    messages={this.state.messages} 
-                    triggers={this.state.triggers}
-                    cases={this.state.cases} 
+                    helpTopics={this.state.helpTopics} 
+                    keywords={this.state.keywords} 
                     copyToClipboard={this.copyToClipboard} 
-                    selectedMessageId={this.state.selectedMessageId} 
-                    getSelectedMessage={this.getSelectedMessage} 
+                    selectedTopicId={this.state.selectedTopicId} 
+                    getSelectedTopic={this.getSelectedTopic} 
                     isCopied={this.state.isCopied}
-                    getSelectedTrigger={this.getSelectedTrigger}
-                    selectedTrigger={this.state.selectedTrigger}
-                    getSelectedCase={this.getSelectedCase}
-                    selectedCase={this.state.selectedCase}
+                    getSelectedFilter={this.getSelectedFilter}
+                    filter={this.state.filter}
                 />
             </div>
         )
